@@ -14,7 +14,7 @@ val repositoryModule = module(override = true) {
     single { createAppDatabase(get(), get()) }
     single { createCollectionDao(get()) }
     single { Gson() }
-    single<CollectionRepository> { CollectionRepositoryImpl(get(), get()) }
+    single<CollectionRepository> { CollectionRepositoryImpl(get(), get(), get()) }
 }
 
 fun createDatabaseName() = Constants.DATABASE_NAME
