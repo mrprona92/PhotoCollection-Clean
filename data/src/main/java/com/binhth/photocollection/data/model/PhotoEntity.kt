@@ -1,6 +1,5 @@
 package com.binhth.photocollection.data.model
 
-import androidx.room.Entity
 import com.binhth.photocollection.data.base.BaseEntity
 import com.binhth.photocollection.data.base.EntityMapper
 import com.binhth.photocollection.domain.model.Photo
@@ -8,7 +7,6 @@ import com.binhth.photocollection.domain.model.Urls
 import com.binhth.photocollection.domain.model.User
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "photo", primaryKeys = ["id"])
 data class PhotoEntity(
     @field: SerializedName("id") val id: String?,
     @field: SerializedName("created_at") val createdAt: String? = null,
