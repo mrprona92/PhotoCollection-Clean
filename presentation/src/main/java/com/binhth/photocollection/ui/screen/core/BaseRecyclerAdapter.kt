@@ -3,11 +3,17 @@ package com.binhth.photocollection.ui.screen.core
 
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import java.util.concurrent.Executors
 
-abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder<ViewDataBinding>>() {
-
-    var items: MutableList<T> = arrayListOf()
+abstract class BaseRecyclerAdapter<T>(callBack: DiffUtil.ItemCallback<T>) :
+    ListAdapter<T, BaseViewHolder<ViewDataBinding>>(
+        AsyncDifferConfig.Builder<T>(callBack)
+            .setBackgroundThreadExecutor(Executors.newSingleThreadExecutor())
+            .build()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewDataBinding> {
         return BaseViewHolder(createBinding(parent = parent, viewType = viewType))
@@ -21,8 +27,5 @@ abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder<View
     protected abstract fun createBinding(parent: ViewGroup, viewType: Int? = 0): ViewDataBinding
 
     protected abstract fun bind(binding: ViewDataBinding, item: T)
-
-    private fun getItem(position: Int): T {
-        return items[position]
-    }
 }
+

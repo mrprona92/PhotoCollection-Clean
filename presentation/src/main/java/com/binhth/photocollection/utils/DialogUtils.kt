@@ -1,4 +1,4 @@
-package com.tranhoabinh.framgia.moviedbkotlin.utils
+package com.binhth.photocollection.utils
 
 import android.content.Context
 import android.widget.Toast

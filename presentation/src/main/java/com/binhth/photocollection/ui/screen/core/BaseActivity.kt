@@ -24,17 +24,13 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : AppCompatActivity() {
         title = tag
     }
 
-    open fun replaceFragmentAddToBackStack(fragment: Fragment, container: Int, tag: String) {
-        supportFragmentManager.beginTransaction().apply {
-            replace(container, fragment, tag)
-            addToBackStack(tag)
-            commit()
-        }
-    }
 
-    open fun replaceFragment(fragment: Fragment, container: Int, tag: String) {
+    open fun replaceFragment(fragment: Fragment, container: Int, tag: String, isAddToBackStack: Boolean) {
         supportFragmentManager.beginTransaction().apply {
             replace(container, fragment, tag)
+            if (isAddToBackStack) {
+                addToBackStack(tag)
+            }
             commit()
         }
         title = tag

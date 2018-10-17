@@ -1,10 +1,11 @@
-package com.tranhoabinh.framgia.moviedbkotlin.utils
+package com.binhth.photocollection.utils
 
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-class EndlessScrollListener(val onLoadMore: (page:Int) -> Unit , private val gridLayoutManager: GridLayoutManager) : RecyclerView.OnScrollListener() {
+class EndlessScrollListener(val onLoadMore: (page: Int) -> Unit) : RecyclerView.OnScrollListener() {
     private var previousTotal = 0
     private val visibleThreshold = 8
     var firstVisibleItem: Int = 0
@@ -17,8 +18,13 @@ class EndlessScrollListener(val onLoadMore: (page:Int) -> Unit , private val gri
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
         visibleItemCount = recyclerView.childCount
-        totalItemCount = gridLayoutManager.itemCount
-        firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
+        totalItemCount = recyclerView.layoutManager?.itemCount ?: 0
+
+        if (recyclerView.layoutManager is LinearLayoutManager) {
+            firstVisibleItem = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+        } else if (recyclerView.layoutManager is GridLayoutManager) {
+            firstVisibleItem = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+        }
 
         if (loading) {
             if (totalItemCount > previousTotal) {

@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class MainActivity : BaseActivity<MainActivityViewModel>() {
     override fun getLayout(): Int = R.layout.activity_main
 
-    var toggle: ActionBarDrawerToggle? = null
+    private var toggle: ActionBarDrawerToggle? = null
 
     override fun initComponent(savedInstanceState: Bundle?) {
         setSupportActionBar(toolbar)
@@ -21,8 +21,8 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
         toggle = ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.app_name, R.string.app_name
         )
-        drawer.addDrawerListener(toggle!!)
-        toggle!!.syncState()
+        drawer.addDrawerListener(toggle as DrawerLayout.DrawerListener)
+        toggle?.syncState()
 
         navigation_view.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -53,7 +53,5 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
         }
         return true
     }
-
-    private var mToolBarNavigationListenerIsRegistered = false
 
 }

@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.tranhoabinh.framgia.moviedbkotlin.utils.DialogUtils
+import com.binhth.photocollection.utils.DialogUtils
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
     abstract val bindingVariable: Int
@@ -23,8 +23,6 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        binding.setLifecycleOwner(this)
-        binding.root.isClickable = true
         initContent(binding)
         return binding.root
     }
@@ -32,6 +30,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            setLifecycleOwner(this@BaseFragment)
             setVariable(bindingVariable, viewModel)
             root.isClickable = true
             executePendingBindings()
