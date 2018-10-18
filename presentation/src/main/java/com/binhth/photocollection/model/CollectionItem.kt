@@ -18,13 +18,13 @@ class CollectionItemMapper : ItemMapper<Collection, CollectionItem> {
         id = model.id.toString(),
         title = model.title,
         totalPhotos = model.totalPhotos.toString(),
-        coverPhoto = model.coverPhoto?.urls?.full
+        coverPhoto = model.coverPhoto?.urls?.regular
     )
 
     override fun mapToDomain(modelItem: CollectionItem) = Collection(
         id = modelItem.id.toInt(),
         title = modelItem.title,
         totalPhotos = modelItem.totalPhotos?.toInt(),
-        coverPhoto = CoverPhoto(Urls(full = modelItem.coverPhoto))
+        coverPhoto = CoverPhoto(Urls(regular = modelItem.coverPhoto))
     )
 }

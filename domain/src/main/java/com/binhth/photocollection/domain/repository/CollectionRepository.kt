@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 interface CollectionRepository : Repository {
 
-    fun getCollections(page: String): Single<List<Collection>>
+    fun getCollections(page: Int): Single<List<Collection>>
 
     fun getCollectionPhotos(collectionId: String, page: String): Single<List<Photo>>
 }

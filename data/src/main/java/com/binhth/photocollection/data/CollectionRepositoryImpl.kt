@@ -21,7 +21,7 @@ class CollectionRepositoryImpl constructor(
             .doOnError { Throwable("Errors") }
     }
 
-    override fun getCollections(page: String): Single<List<Collection>> {
+    override fun getCollections(page: Int): Single<List<Collection>> {
         return photoCollectionApi.requestCollections(page)
             .map { response ->
                 response.map { collectionMapper.mapToDomain(it) }

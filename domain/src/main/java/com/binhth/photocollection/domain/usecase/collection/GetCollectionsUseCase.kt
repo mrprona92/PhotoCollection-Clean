@@ -15,8 +15,8 @@ open class GetCollectionsUseCase constructor(
     }
 
     override fun createObservable(params: Params?): Single<List<Collection>> {
-        return collectionRepository.getCollections(params?.page ?: "1")
+        return collectionRepository.getCollections(params?.page ?: 1)
     }
 
-    data class Params(val page: String)
+    data class Params(val page: Int)
 }

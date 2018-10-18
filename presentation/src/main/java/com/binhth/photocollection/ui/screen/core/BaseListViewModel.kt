@@ -27,18 +27,23 @@ abstract class BaseListViewModel<T> : BaseViewModel() {
         requestData(1)
     }
 
-    fun loadMore(page: Int) {
+    fun loadMore() {
         isLoadMore.value = true
-        requestData(page)
+        requestData(currentPage.value?.plus(1) ?: 1)
     }
 
 
-    override fun onLoadSuccess(page: Int) {
-        super.onLoadSuccess(page)
+    open fun onLoadSuccess(page: Int, items: List<T>) {
+        super.onLoadSuccess()
         isLoadMore.value = false
         isRefresh.value = false
         isLoadFailed.value = false
         currentPage.value = page
+
+        //Reassign value of list with temp list from new value
+        val tempList = listItem.value ?: arrayListOf()
+        tempList.addAll(items)
+        listItem.value = tempList
     }
 
     override fun onLoadFail(e: Throwable) {

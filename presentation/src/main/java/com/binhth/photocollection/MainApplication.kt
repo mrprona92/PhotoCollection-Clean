@@ -6,6 +6,7 @@ import com.binhth.photocollection.data.di.remoteModule
 import com.binhth.photocollection.data.di.repositoryModule
 import com.binhth.photocollection.di.appModule
 import com.binhth.photocollection.di.itemMapperModule
+import com.binhth.photocollection.di.viewModelModule
 import com.binhth.photocollection.domain.di.useCaseModule
 import org.koin.android.ext.android.startKoin
 
@@ -21,7 +22,8 @@ class MainApplication : Application() {
                 repositoryModule,
                 useCaseModule,
                 appModule,
-                itemMapperModule
+                itemMapperModule,
+                viewModelModule
             )
         )
     }
