@@ -28,10 +28,14 @@ abstract class BaseListViewModel<T> : BaseViewModel() {
     }
 
     fun loadMore() {
-        isLoadMore.value = true
-        requestData(currentPage.value?.plus(1) ?: 1)
+        if (isLoading.value == true
+            || isRefresh.value == true
+            || isLoadMore.value == true
+        ) else {
+            isLoadMore.value = true
+            requestData(currentPage.value?.plus(1) ?: 1)
+        }
     }
-
 
     open fun onLoadSuccess(page: Int, items: List<T>) {
         super.onLoadSuccess()

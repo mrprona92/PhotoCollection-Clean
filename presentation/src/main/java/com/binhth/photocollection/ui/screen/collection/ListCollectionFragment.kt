@@ -35,13 +35,7 @@ class ListCollectionFragment : BaseListFragment<FragmentListItemBinding, ListCol
             val gridLayoutManager = GridLayoutManager(context, 2)
 
             endlessScrollListener = EndlessScrollListener(onLoadMore = {
-                if (isLoading.value == true
-                    || isRefresh.value == true
-                    || isLoadMore.value == true
-                ) else {
-                    isLoadMore.value = true
                     viewModel.loadMore()
-                }
             })
             viewBinding.recyclerView.apply {
                 layoutManager = gridLayoutManager
