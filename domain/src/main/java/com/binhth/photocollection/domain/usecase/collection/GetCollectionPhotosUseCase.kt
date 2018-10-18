@@ -15,8 +15,8 @@ open class GetCollectionPhotosUseCase constructor(
     }
 
     override fun createObservable(params: Params?): Single<List<Photo>> {
-        return collectionRepository.getCollectionPhotos(params?.id ?: "", params?.page ?: "")
+        return collectionRepository.getCollectionPhotos(params?.id ?: "", params?.page ?: 1)
     }
 
-    data class Params(val id: String, val page: String)
+    data class Params(val id: String, val page: Int)
 }
