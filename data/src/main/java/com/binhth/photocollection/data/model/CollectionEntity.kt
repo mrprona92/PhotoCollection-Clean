@@ -1,13 +1,11 @@
 package com.binhth.photocollection.data.model
 
-import androidx.room.Entity
 import com.binhth.photocollection.data.base.BaseEntity
 import com.binhth.photocollection.data.base.EntityMapper
 import com.binhth.photocollection.domain.model.Collection
 import com.binhth.photocollection.domain.model.CoverPhoto
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "collection", primaryKeys = ["id"])
 data class CollectionEntity(
     @field: SerializedName("id") val id: Int?,
     @field: SerializedName("title") val title: String? = null,
