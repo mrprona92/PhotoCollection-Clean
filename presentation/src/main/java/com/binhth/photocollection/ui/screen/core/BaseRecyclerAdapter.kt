@@ -16,7 +16,9 @@ abstract class BaseRecyclerAdapter<T>(callBack: DiffUtil.ItemCallback<T>) :
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewDataBinding> {
-        return BaseViewHolder(createBinding(parent = parent, viewType = viewType))
+        return BaseViewHolder(createBinding(parent = parent, viewType = viewType).apply {
+            bindFirstTime(this)
+        })
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<ViewDataBinding>, position: Int) {
@@ -25,6 +27,8 @@ abstract class BaseRecyclerAdapter<T>(callBack: DiffUtil.ItemCallback<T>) :
     }
 
     protected abstract fun createBinding(parent: ViewGroup, viewType: Int? = 0): ViewDataBinding
+
+    protected abstract fun bindFirstTime(binding: ViewDataBinding)
 
     protected abstract fun bind(binding: ViewDataBinding, item: T)
 }

@@ -3,4 +3,5 @@
     <string name="ok">OK</string>
     <string name="list_collection">List collection</string>
     <string name="search_collection">Search collection</string>
+    <string name="total_image_label">Total image: </string>
 </resources>

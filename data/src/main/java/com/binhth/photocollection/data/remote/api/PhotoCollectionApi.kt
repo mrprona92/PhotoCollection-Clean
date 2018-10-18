@@ -12,7 +12,7 @@ interface PhotoCollectionApi {
 
     @GET(Constants.COLLECTION_LIST)
     fun requestCollections(
-        @Query(Constants.PAGE) page: String
+        @Query(Constants.PAGE) page: Int
     ): Single<List<CollectionEntity>>
 
     @GET(Constants.COLLECTION_PHOTOS)

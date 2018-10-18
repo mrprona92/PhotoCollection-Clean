@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.binhth.photocollection.R
+import com.binhth.photocollection.ui.screen.collection.ListCollectionFragment
 import com.binhth.photocollection.ui.screen.core.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -27,7 +28,10 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
         navigation_view.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_collection_list -> {
-                    //TODO
+                    replaceFragment(
+                        ListCollectionFragment.newInstance(),
+                        R.id.container, ListCollectionFragment.TAG, false
+                    )
                 }
                 R.id.action_search -> {
                     //TODO
@@ -36,6 +40,10 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
             drawer_layout.closeDrawer(GravityCompat.START)
             true
         }
+        replaceFragment(
+            ListCollectionFragment.newInstance(),
+            R.id.container, ListCollectionFragment.TAG, false
+        )
     }
 
 
