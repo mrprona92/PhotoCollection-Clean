@@ -15,7 +15,7 @@ class ListPhotoViewModel constructor(
 ) : BaseListViewModel<PhotoItem>() {
     val idCollection = MutableLiveData<String>()
     override fun requestData(page: Int) {
-        idCollection.value?.let {
+        idCollection.value.let {
             compositeDisposable.add(getCollectionPhotosUseCase.createObservable(
                 GetCollectionPhotosUseCase.Params(id = it, page = page)
             )
