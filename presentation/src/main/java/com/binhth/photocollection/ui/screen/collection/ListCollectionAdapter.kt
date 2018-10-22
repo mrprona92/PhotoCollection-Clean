@@ -14,8 +14,17 @@ import com.binhth.photocollection.ui.screen.core.diffobject.CollectionDiff
 class ListCollectionAdapter(private val itemClick: (CollectionItem) -> Unit) :
     BaseRecyclerAdapter<CollectionItem>(object :
         CollectionDiff() {}) {
+
     override fun bindFirstTime(binding: ViewDataBinding) {
-        if (binding is ItemCollectionBinding) binding.item?.let { itemClick.invoke(it) }
+        if (binding is ItemCollectionBinding) {
+            binding.apply {
+                root.setOnClickListener {
+                    item?.apply {
+                        itemClick.invoke(this)
+                    }
+                }
+            }
+        }
     }
 
     override fun createBinding(parent: ViewGroup, viewType: Int?): ViewDataBinding {

@@ -2,6 +2,7 @@ package com.binhth.photocollection.ui.screen
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -60,6 +61,26 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
             android.R.id.home -> super.onBackPressed()
         }
         return true
+    }
+
+    private var mToolBarNavigationListenerIsRegistered = false
+
+    fun showBackButton(enable: Boolean) {
+        if (enable) {
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            toggle?.isDrawerIndicatorEnabled = false
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            if (!mToolBarNavigationListenerIsRegistered) {
+                toggle?.toolbarNavigationClickListener = View.OnClickListener { onBackPressed() }
+                mToolBarNavigationListenerIsRegistered = true
+            }
+        } else {
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            toggle?.isDrawerIndicatorEnabled = true
+            toggle?.toolbarNavigationClickListener = null
+            mToolBarNavigationListenerIsRegistered = false
+        }
     }
 
 }
