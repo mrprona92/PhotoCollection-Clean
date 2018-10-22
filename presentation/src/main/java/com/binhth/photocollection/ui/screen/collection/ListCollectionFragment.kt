@@ -4,14 +4,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.binhth.photocollection.BR
-import com.binhth.photocollection.R
 import com.binhth.photocollection.databinding.FragmentListItemBinding
 import com.binhth.photocollection.model.CollectionItem
-import com.binhth.photocollection.ui.screen.MainActivity
 import com.binhth.photocollection.ui.screen.core.BaseListFragment
-import com.binhth.photocollection.ui.screen.photo.ListPhotoFragment
 import com.binhth.photocollection.utils.EndlessScrollListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 
 class ListCollectionFragment : BaseListFragment<FragmentListItemBinding, ListCollectionViewModel, CollectionItem>(),
@@ -33,20 +31,11 @@ class ListCollectionFragment : BaseListFragment<FragmentListItemBinding, ListCol
         viewBinding.viewModel = viewModel
         viewBinding.swipeRefresh.setOnRefreshListener(this@ListCollectionFragment)
         viewModel.apply {
-            val listCollectionAdapter = ListCollectionAdapter(itemClick = {
-                if (activity is MainActivity)
-                    (activity as MainActivity).apply {
-                        val listPhotoFragment = ListPhotoFragment.newInstance(it.id)
-                        replaceFragment(
-                            listPhotoFragment,
-                            R.id.container, ListPhotoFragment.TAG,true
-                        )
-                    }
-            })
+            val listCollectionAdapter = ListCollectionAdapter(itemClick = { TODO("open photo list") })
             val gridLayoutManager = GridLayoutManager(context, 2)
 
             endlessScrollListener = EndlessScrollListener(onLoadMore = {
-                viewModel.loadMore()
+                    viewModel.loadMore()
             })
             viewBinding.recyclerView.apply {
                 layoutManager = gridLayoutManager

@@ -13,7 +13,7 @@ class CollectionRepositoryImpl constructor(
     private val collectionMapper: CollectionEntityMapper,
     private val photoMapper: PhotoEntityMapper
 ) : CollectionRepository {
-    override fun getCollectionPhotos(collectionId: String, page: Int): Single<List<Photo>> {
+    override fun getCollectionPhotos(collectionId: String, page: String): Single<List<Photo>> {
         return photoCollectionApi.requestCollectionPhotos(collectionId, page)
             .map { response ->
                 response.map { photoMapper.mapToDomain(it) }

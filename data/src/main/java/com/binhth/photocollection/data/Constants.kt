@@ -11,6 +11,6 @@ object Constants {
     const val PAGE = "page"
     const val ID = "id"
     const val PER_PAGE = "per_page"
-    const val PAGE_SIZE = 10
+    const val PAGE_SIZE = 20
     const val TIME_OUT = 15L
 }

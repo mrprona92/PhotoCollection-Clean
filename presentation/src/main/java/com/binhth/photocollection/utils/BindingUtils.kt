@@ -24,7 +24,6 @@ fun ImageView.setImageUrl(url: String? = "", placeholder: Drawable?, fitCenter: 
     if (TextUtils.isEmpty(url)) {
         setImageDrawable(placeholder)
     } else {
-        placeholder?.let { options.placeholder(it) }
         fitCenter?.apply { if (fitCenter) options.fitCenter() }
         centerCrop?.apply { if (centerCrop) options.centerCrop() }
         Glide.with(context).load(url).apply(options).into(this)

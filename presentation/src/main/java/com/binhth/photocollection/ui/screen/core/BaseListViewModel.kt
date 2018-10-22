@@ -1,7 +1,6 @@
 package com.binhth.photocollection.ui.screen.core
 
 import androidx.lifecycle.MutableLiveData
-import com.binhth.photocollection.data.Constants
 
 abstract class BaseListViewModel<T> : BaseViewModel() {
     var currentPage = MutableLiveData<Int>().apply { value = 0 }
@@ -9,7 +8,6 @@ abstract class BaseListViewModel<T> : BaseViewModel() {
     val isLoadFailed = MutableLiveData<Boolean>().apply { value = false }
     val isRefresh = MutableLiveData<Boolean>().apply { value = false }
     val listItem = MutableLiveData<ArrayList<T>>()
-    val isNoMoreData = MutableLiveData<Boolean>().apply { value = false }
 
     private fun isFirstLoading() = currentPage.value == 0
             && (listItem.value == null || listItem.value?.size == 0)
@@ -26,7 +24,6 @@ abstract class BaseListViewModel<T> : BaseViewModel() {
     fun refreshData() {
         isRefresh.value = true
         isLoadMore.value = false
-        isNoMoreData.value = false
         requestData(1)
     }
 
@@ -34,7 +31,6 @@ abstract class BaseListViewModel<T> : BaseViewModel() {
         if (isLoading.value == true
             || isRefresh.value == true
             || isLoadMore.value == true
-            || isNoMoreData.value == true
         ) else {
             isLoadMore.value = true
             requestData(currentPage.value?.plus(1) ?: 1)
@@ -48,10 +44,6 @@ abstract class BaseListViewModel<T> : BaseViewModel() {
         isLoadFailed.value = false
         currentPage.value = page
 
-        //Case items.isEmpty for case result of load more = multi PAGE_SIZE
-        if (items.size < Constants.PAGE_SIZE || items.isEmpty()) {
-            isNoMoreData.value = true
-        }
         //Reassign value of list with temp list from new value
         val tempList = listItem.value ?: arrayListOf()
         tempList.addAll(items)
@@ -63,5 +55,6 @@ abstract class BaseListViewModel<T> : BaseViewModel() {
         isRefresh.value = false
         isLoadMore.value = false
         isLoadFailed.value = true
+        currentPage.value?.minus(1)
     }
 }

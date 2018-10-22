@@ -18,15 +18,14 @@ class PhotoItemMapper : ItemMapper<Photo, PhotoItem> {
     override fun mapToPresentation(model: Photo) = PhotoItem(
         id = model.id,
         createdAt = model.createdAt,
-        urls = model.urls?.thumb,
+        urls = model.urls?.full,
         username = model.user?.username,
         likes = model.likes
     )
-
     override fun mapToDomain(modelItem: PhotoItem) = Photo(
         id = modelItem.id,
         createdAt = modelItem.createdAt,
-        urls = Urls(thumb = modelItem.urls),
+        urls = Urls(full = modelItem.urls),
         user = User(username = modelItem.username),
         likes = modelItem.likes
     )

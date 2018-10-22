@@ -6,5 +6,7 @@ import org.koin.dsl.module.module
 
 val itemMapperModule = module(override = true) {
     single { CollectionItemMapper() }
-    single { PhotoItemMapper() }
+    single {
+        { PhotoItemMapper() }
+    }
 }
