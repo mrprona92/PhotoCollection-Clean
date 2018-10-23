@@ -13,21 +13,16 @@ class CollectionRepositoryImpl constructor(
     private val collectionMapper: CollectionEntityMapper,
     private val photoMapper: PhotoEntityMapper
 ) : CollectionRepository {
-    override fun searchPhotos(photoName: String, page: Int): Single<List<Photo>> {
-        return photoCollectionApi.requestSearchPhotos(photoName, page)
-            .map { response ->
-                response.listPhotos.map { photoMapper.mapToDomain(it) }
-            }
-            .doOnError { Throwable("Errors") }
-    }
+    override fun searchPhotos(photoName: String, page: Int): Single<List<Photo>> =
+        photoCollectionApi.requestSearchPhotos(photoName, page).map { response ->
+            response.listPhotos?.map { photoMapper.mapToDomain(it) }
+        }
 
-    override fun searchCollections(collectionName: String, page: Int): Single<List<Collection>> {
-        return photoCollectionApi.requestSearchCollections(collectionName, page)
+    override fun searchCollections(collectionName: String, page: Int): Single<List<Collection>> =
+        photoCollectionApi.requestSearchCollections(collectionName, page)
             .map { response ->
-                response.listCollecion.map { collectionMapper.mapToDomain(it) }
+                response.listCollecion?.map { collectionMapper.mapToDomain(it) }
             }
-            .doOnError { Throwable("Errors") }
-    }
 
     override fun getCollectionPhotos(collectionId: String, page: Int): Single<List<Photo>> {
         return photoCollectionApi.requestCollectionPhotos(collectionId, page)
