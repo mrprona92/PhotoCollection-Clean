@@ -9,5 +9,10 @@ interface CollectionRepository : Repository {
 
     fun getCollections(page: Int): Single<List<Collection>>
 
+    fun searchCollections(collectionName: String,page: Int): Single<List<Collection>>
+
     fun getCollectionPhotos(collectionId: String, page: Int): Single<List<Photo>>
+
+    fun searchPhotos(photoName: String,page: Int): Single<List<Photo>>
+
 }
