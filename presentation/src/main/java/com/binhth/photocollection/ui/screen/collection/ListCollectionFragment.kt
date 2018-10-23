@@ -36,10 +36,10 @@ class ListCollectionFragment : BaseListFragment<FragmentListItemBinding, ListCol
             val listCollectionAdapter = ListCollectionAdapter(itemClick = {
                 if (activity is MainActivity)
                     (activity as MainActivity).apply {
-                        val listPhotoFragment = ListPhotoFragment.newInstance(it.id)
+                        val listPhotoFragment = ListPhotoFragment.newInstance(it.id, true)
                         replaceFragment(
                             listPhotoFragment,
-                            R.id.container, ListPhotoFragment.TAG,true
+                            R.id.container, ListPhotoFragment.TAG, true
                         )
                     }
             })
@@ -76,8 +76,10 @@ class ListCollectionFragment : BaseListFragment<FragmentListItemBinding, ListCol
                 }
             })
 
+            queryString.observe(this@ListCollectionFragment, Observer {
+                refreshData()
+            })
         }
-        activity?.title = tag
     }
 
 

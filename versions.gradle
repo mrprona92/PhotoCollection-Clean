@@ -47,6 +47,7 @@ versions.robolectric = "3.4.2"
 versions.oss_licenses = "16.0.0"
 versions.license_plugin = "0.9.3"
 versions.koin = "1.0.0"
+versions.searchview = "0.7.6"
 def deps = [:]
 
 def build_versions = [:]
@@ -206,6 +207,10 @@ deps.license = licenses
 def robolectric = [:]
 robolectric.all = "org.robolectric:robolectric:$versions.robolectric"
 deps.robolectric = robolectric
+
+def searchview = [:]
+searchview.all = "com.github.mancj:MaterialSearchBar:$versions.searchview"
+deps.searchview = searchview
 
 def koin = [:]
 koin.core = "org.koin:koin-core:$versions.koin"
