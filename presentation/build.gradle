@@ -97,6 +97,8 @@ dependencies {
     implementation deps.koin.android
     implementation deps.koin.viewmodel
 
+    implementation deps.searchview.all
+
     /**
      * testing
      */

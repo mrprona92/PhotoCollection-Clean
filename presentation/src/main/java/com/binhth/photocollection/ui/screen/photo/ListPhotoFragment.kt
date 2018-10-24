@@ -21,9 +21,12 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
 
         const val PHOTOLIST_ID = "photoListId"
 
-        fun newInstance(photoListId: String): ListPhotoFragment {
+        const val IS_CALL_FROM_COLLECTIONLIST = "isFromCollection"
+
+        fun newInstance(photoListId: String, isFromCollection: Boolean): ListPhotoFragment {
             val args = Bundle()
             args.putString(PHOTOLIST_ID, photoListId)
+            args.putBoolean(IS_CALL_FROM_COLLECTIONLIST, isFromCollection)
             val fragment = ListPhotoFragment()
             fragment.arguments = args
             return fragment
@@ -46,6 +49,12 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
             val listPhotoAdapter = ListPhotoAdapter(itemClick = { TODO("open photo detail") })
             val gridLayoutManager = GridLayoutManager(context, 2)
             idCollection.value = arguments?.getString(PHOTOLIST_ID)
+            isCallFromCollectionList.value = arguments?.getBoolean(IS_CALL_FROM_COLLECTIONLIST)
+
+            if (activity is MainActivity) {
+                mainActivity = activity as MainActivity
+            }
+
             endlessScrollListener = EndlessScrollListener(onLoadMore = {
                 viewModel.loadMore()
             })
@@ -77,10 +86,17 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
                 }
             })
 
+            isCallFromCollectionList.observe(this@ListPhotoFragment, Observer {
+                when (isCallFromCollectionList.value) {
+                    true -> {
+                        mainActivity.showBackButton(true)
+                    }
+                }
+            })
+            queryString.observe(this@ListPhotoFragment, Observer {
+                refreshData()
+            })
         }
-        activity?.title = tag
-        mainActivity = activity as MainActivity
-        mainActivity.showBackButton(true)
     }
 
 
@@ -95,6 +111,8 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
         viewModel.listItem.removeObservers(this)
         viewModel.isLoading.removeObservers(this)
         viewModel.isRefresh.removeObservers(this)
-        mainActivity.showBackButton(false)
+        if (viewModel.isCallFromCollectionList.value == true) {
+            mainActivity.showBackButton(false)
+        }
     }
 }

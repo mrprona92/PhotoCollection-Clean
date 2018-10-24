@@ -4,4 +4,8 @@
     <string name="list_collection">List collection</string>
     <string name="search_collection">Search collection</string>
     <string name="total_image_label">Total image: </string>
+    <string name="search_collection_tab1">Collection</string>
+    <string name="search_collection_tab2">Photo</string>
+    <string name="search_collection_hint">Typing to search</string>
+    <string name="search_collection_placeholder">Search collection, photo</string>
 </resources>

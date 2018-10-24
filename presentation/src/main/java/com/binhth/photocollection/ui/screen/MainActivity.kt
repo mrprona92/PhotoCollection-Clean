@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.binhth.photocollection.R
 import com.binhth.photocollection.ui.screen.collection.ListCollectionFragment
 import com.binhth.photocollection.ui.screen.core.BaseActivity
+import com.binhth.photocollection.ui.screen.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -35,6 +36,10 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
                     )
                 }
                 R.id.action_search -> {
+                    replaceFragment(
+                        SearchFragment.newInstance(),
+                        R.id.container, SearchFragment.TAG, false
+                    )
                     //TODO
                 }
             }

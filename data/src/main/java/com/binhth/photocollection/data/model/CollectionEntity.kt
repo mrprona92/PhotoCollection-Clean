@@ -4,13 +4,14 @@ import com.binhth.photocollection.data.base.BaseEntity
 import com.binhth.photocollection.data.base.EntityMapper
 import com.binhth.photocollection.domain.model.Collection
 import com.binhth.photocollection.domain.model.CoverPhoto
+import com.binhth.photocollection.domain.model.Urls
 import com.google.gson.annotations.SerializedName
 
 data class CollectionEntity(
     @field: SerializedName("id") val id: Int?,
     @field: SerializedName("title") val title: String? = null,
     @field: SerializedName("total_photos") val totalPhotos: Int? = null,
-    @field: SerializedName("cover_photo") val coverPhoto: CoverPhoto? = null
+    @field: SerializedName("cover_photo") val coverPhoto: CoverPhotoEntity? = null
 ) : BaseEntity()
 
 
@@ -20,13 +21,29 @@ class CollectionEntityMapper : EntityMapper<Collection, CollectionEntity> {
         id = entity.id,
         title = entity.title,
         totalPhotos = entity.totalPhotos,
-        coverPhoto = entity.coverPhoto
+        coverPhoto = CoverPhoto(
+            Urls(
+                entity.coverPhoto?.urls?.small,
+                entity.coverPhoto?.urls?.thumb,
+                entity.coverPhoto?.urls?.raw,
+                entity.coverPhoto?.urls?.regular,
+                entity.coverPhoto?.urls?.full
+            )
+        )
     )
 
     override fun mapToEntity(model: Collection) = CollectionEntity(
         id = model.id,
         title = model.title,
         totalPhotos = model.totalPhotos,
-        coverPhoto = model.coverPhoto
+        coverPhoto = CoverPhotoEntity(
+            UrlsEntity(
+                model.coverPhoto?.urls?.small,
+                model.coverPhoto?.urls?.thumb,
+                model.coverPhoto?.urls?.raw,
+                model.coverPhoto?.urls?.regular,
+                model.coverPhoto?.urls?.full
+            )
+        )
     )
 }
