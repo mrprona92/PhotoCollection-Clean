@@ -50,7 +50,10 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
             val gridLayoutManager = GridLayoutManager(context, 2)
             idCollection.value = arguments?.getString(PHOTOLIST_ID)
             isCallFromCollectionList.value = arguments?.getBoolean(IS_CALL_FROM_COLLECTIONLIST)
-            mainActivity = activity as MainActivity
+
+            if (activity is MainActivity) {
+                mainActivity = activity as MainActivity
+            }
 
             endlessScrollListener = EndlessScrollListener(onLoadMore = {
                 viewModel.loadMore()
