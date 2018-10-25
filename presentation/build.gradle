@@ -98,6 +98,11 @@ dependencies {
     implementation deps.koin.viewmodel
 
     implementation deps.searchview.all
+    implementation deps.photoview.all
+    implementation deps.fabmenu.all
+    implementation deps.fetch.all
+    implementation deps.fetch.okhttp
+    implementation deps.rxpermission.all
 
     /**
      * testing

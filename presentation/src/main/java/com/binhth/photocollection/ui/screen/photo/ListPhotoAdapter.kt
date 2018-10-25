@@ -15,7 +15,15 @@ class ListPhotoAdapter(private val itemClick: (PhotoItem) -> Unit) :
     BaseRecyclerAdapter<PhotoItem>(object :
         PhotoDiff() {}) {
     override fun bindFirstTime(binding: ViewDataBinding) {
-        if (binding is ItemPhotoBinding) binding.item?.let { itemClick.invoke(it) }
+        if (binding is ItemPhotoBinding) {
+            binding.apply {
+                root.setOnClickListener {
+                    item?.apply {
+                        itemClick.invoke(this)
+                    }
+                }
+            }
+        }
     }
 
     override fun createBinding(parent: ViewGroup, viewType: Int?): ViewDataBinding {

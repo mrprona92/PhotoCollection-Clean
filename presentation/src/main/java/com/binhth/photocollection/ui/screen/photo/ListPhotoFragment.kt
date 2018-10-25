@@ -5,10 +5,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.binhth.photocollection.BR
+import com.binhth.photocollection.R
 import com.binhth.photocollection.databinding.FragmentListItemBinding
 import com.binhth.photocollection.model.PhotoItem
-import com.binhth.photocollection.ui.screen.MainActivity
 import com.binhth.photocollection.ui.screen.core.BaseListFragment
+import com.binhth.photocollection.ui.screen.photodetail.PhotoDetailsFragment
 import com.binhth.photocollection.utils.EndlessScrollListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -23,7 +24,7 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
 
         const val IS_CALL_FROM_COLLECTIONLIST = "isFromCollection"
 
-        fun newInstance(photoListId: String, isFromCollection: Boolean): ListPhotoFragment {
+        fun newInstance(photoListId: String?, isFromCollection: Boolean): ListPhotoFragment {
             val args = Bundle()
             args.putString(PHOTOLIST_ID, photoListId)
             args.putBoolean(IS_CALL_FROM_COLLECTIONLIST, isFromCollection)
@@ -40,20 +41,22 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
 
     private lateinit var endlessScrollListener: EndlessScrollListener
 
-    private lateinit var mainActivity: MainActivity
-
     override fun initContent(viewBinding: FragmentListItemBinding) {
         viewBinding.viewModel = viewModel
         viewBinding.swipeRefresh.setOnRefreshListener(this@ListPhotoFragment)
         viewModel.apply {
-            val listPhotoAdapter = ListPhotoAdapter(itemClick = { TODO("open photo detail") })
+            val listPhotoAdapter = ListPhotoAdapter(itemClick = {
+                mainActivity.apply {
+                    val photoDetailFragment = PhotoDetailsFragment.newInstance(it.id, it.urlsFullImage)
+                    replaceFragment(
+                        photoDetailFragment,
+                        R.id.container, PhotoDetailsFragment.TAG, true
+                    )
+                }
+            })
             val gridLayoutManager = GridLayoutManager(context, 2)
             idCollection.value = arguments?.getString(PHOTOLIST_ID)
             isCallFromCollectionList.value = arguments?.getBoolean(IS_CALL_FROM_COLLECTIONLIST)
-
-            if (activity is MainActivity) {
-                mainActivity = activity as MainActivity
-            }
 
             endlessScrollListener = EndlessScrollListener(onLoadMore = {
                 viewModel.loadMore()

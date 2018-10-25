@@ -5,6 +5,7 @@ import com.binhth.photocollection.data.di.mapperModule
 import com.binhth.photocollection.data.di.remoteModule
 import com.binhth.photocollection.data.di.repositoryModule
 import com.binhth.photocollection.di.appModule
+import com.binhth.photocollection.di.fetchModule
 import com.binhth.photocollection.di.itemMapperModule
 import com.binhth.photocollection.di.viewModelModule
 import com.binhth.photocollection.domain.di.useCaseModule
@@ -23,7 +24,8 @@ class MainApplication : Application() {
                 useCaseModule,
                 appModule,
                 itemMapperModule,
-                viewModelModule
+                viewModelModule,
+                fetchModule
             )
         )
     }

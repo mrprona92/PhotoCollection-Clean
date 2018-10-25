@@ -22,8 +22,8 @@ class SearchPagerAdapter(fm: FragmentManager?, context: Context?) : FragmentPage
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> ListCollectionFragment.newInstance()
-            1 -> ListPhotoFragment.newInstance("", false)
-            else -> ListPhotoFragment.newInstance("", false)
+            1 -> ListPhotoFragment.newInstance(null, false)
+            else -> ListPhotoFragment.newInstance(null, false)
         }
     }
 
