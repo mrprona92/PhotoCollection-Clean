@@ -16,21 +16,22 @@ data class PhotoEntity(
 ) : BaseEntity()
 
 
-class PhotoEntityMapper : EntityMapper<Photo, PhotoEntity> {
+class PhotoEntityMapper(private val urlsEntityMapper: UrlsEntityMapper, private val userEntityMapper: UserEntityMapper) :
+    EntityMapper<Photo, PhotoEntity> {
 
     override fun mapToDomain(entity: PhotoEntity) = Photo(
         id = entity.id,
         createdAt = entity.createdAt,
-        urls = Urls(entity.urls?.small, entity.urls?.thumb, entity.urls?.raw, entity.urls?.regular, entity.urls?.full),
-        user = User(entity.user?.id, entity.user?.username),
+        urls = urlsEntityMapper.mapToDomain(entity.urls ?: UrlsEntity()),
+        user = userEntityMapper.mapToDomain(entity.user ?: UserEntity()),
         likes = entity.likes
     )
 
     override fun mapToEntity(model: Photo) = PhotoEntity(
         id = model.id,
         createdAt = model.createdAt,
-        urls = UrlsEntity(model.urls?.small, model.urls?.thumb, model.urls?.raw, model.urls?.regular, model.urls?.full),
-        user = UserEntity(model.user?.id, model.user?.username),
+        urls = urlsEntityMapper.mapToEntity(model.urls ?: Urls()),
+        user = userEntityMapper.mapToEntity(model.user ?: User()),
         likes = model.likes
     )
 }

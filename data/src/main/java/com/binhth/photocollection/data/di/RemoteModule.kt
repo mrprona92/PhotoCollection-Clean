@@ -45,7 +45,7 @@ fun createHeaderInterceptor(
     return Interceptor { chain ->
         val request = chain.request()
         val newUrl = request.url().newBuilder()
-            .addQueryParameter("client_id", Constants.ACCESS_KEY)
+            .addQueryParameter(Constants.CLIENT_ID, Constants.ACCESS_KEY)
             .build()
         val newRequest = request.newBuilder()
             .url(newUrl)
@@ -68,6 +68,8 @@ fun createAppRetrofit(okHttpClient: OkHttpClient): Retrofit {
         .client(okHttpClient)
         .build()
 }
+
+
 
 
 
