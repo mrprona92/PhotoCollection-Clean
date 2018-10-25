@@ -10,6 +10,7 @@ object Constants {
     const val SEARCH_COLLECTIONS = "/search/collections"
 
     const val ACCESS_KEY = "3115d55acaf2eeb00b6aa32ec8e2dbd7a2fa5c5461618262ffe6ecf03142dd29"
+    const val CLIENT_ID = "client_id"
     const val QUERY = "query"
     const val PAGE = "page"
     const val ID = "id"
