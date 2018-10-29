@@ -9,7 +9,6 @@ data class UserEntity(
     val username: String? = null
 ) : BaseEntity()
 
-
 class UserEntityMapper : EntityMapper<User, UserEntity> {
     override fun mapToDomain(entity: UserEntity) = User(
         id = entity.id,

@@ -15,7 +15,6 @@ data class PhotoEntity(
     @field: SerializedName("likes") val likes: Int? = null
 ) : BaseEntity()
 
-
 class PhotoEntityMapper(private val urlsEntityMapper: UrlsEntityMapper, private val userEntityMapper: UserEntityMapper) :
     EntityMapper<Photo, PhotoEntity> {
 

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="viewModel"
+                type="com.binhth.photocollection.ui.screen.photoeditor.brush.BrushViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/sp_8"
+                android:layout_marginEnd="@dimen/sp_8"
+                android:layout_marginStart="@dimen/sp_8"
+                android:layout_marginTop="@dimen/sp_32"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekbar_opacity"
+                tools:background="@android:color/black"
+                tools:listitem="@layout/item_color_picker"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/seekbar_opacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sp_8"
+                android:layout_marginStart="@dimen/sp_8"
+                android:layout_marginTop="@dimen/sp_8"
+                android:progress="100"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_opacity"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_opacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sp_8"
+                android:layout_marginStart="@dimen/sp_8"
+                android:layout_marginTop="@dimen/sp_32"
+                android:text="@string/opacity"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekbar_size"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/seekbar_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sp_8"
+                android:layout_marginStart="@dimen/sp_8"
+                android:layout_marginTop="@dimen/sp_8"
+                android:progress="25"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_brush_size"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_brush_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sp_8"
+                android:layout_marginStart="@dimen/sp_8"
+                android:layout_marginTop="@dimen/sp_8"
+                android:text="@string/brush"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

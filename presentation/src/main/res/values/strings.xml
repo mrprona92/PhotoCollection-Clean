@@ -9,9 +9,16 @@
     <string name="search_collection_hint">Typing to search</string>
     <string name="search_collection_placeholder">Search collection, photo</string>
     <string name="details_image_set_wallpaper">Set as wallpaper</string>
+    <string name="details_image_editor_photo">Editor photo</string>
     <string name="details_image_download">Download Image</string>
     <string name="details_image_download_started">Download started</string>
-    <string name="details_image_download_complete">Image saved in %1$s</string>
+    <string name="details_image_save_complete">Image saved in %1$s</string>
     <string name="request_permission_false">Permission Denied</string>
+    <string name="dialog_quest_save_image">Are you want to exit without saving image ?</string>
+    <string name="dialog_save">Save</string>
+    <string name="dialog_discard">Discard</string>
+    <string name="dialog_cancel">Cancel</string>
     <string name="zero_percent">0%</string>
+    <string name="opacity">Opacity</string>
+    <string name="brush">Brush</string>
 </resources>

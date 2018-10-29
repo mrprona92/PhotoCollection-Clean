@@ -73,4 +73,8 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     open fun showToast(message: String?) {
         DialogUtils.showToast(activity, message)
     }
+
+    open fun onBackPressed(): Boolean {
+        return false
+    }
 }

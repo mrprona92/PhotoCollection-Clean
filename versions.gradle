@@ -52,6 +52,7 @@ versions.photoview = "2.2.0"
 versions.fabmenu = "1.6.4"
 versions.fetch = "2.2.0-RC15"
 versions.rxpermission = "0.10.2"
+versions.editorimage = "0.3.3"
 def deps = [:]
 
 def build_versions = [:]
@@ -232,6 +233,10 @@ deps.fetch = fetch
 def rxpermission = [:]
 rxpermission.all = "com.github.tbruyelle:rxpermissions:$versions.rxpermission"
 deps.rxpermission = rxpermission
+
+def editorimage = [:]
+editorimage.all = "ja.burhanrashid52:photoeditor:$versions.editorimage"
+deps.editorimage = editorimage
 
 def koin = [:]
 koin.core = "org.koin:koin-core:$versions.koin"
