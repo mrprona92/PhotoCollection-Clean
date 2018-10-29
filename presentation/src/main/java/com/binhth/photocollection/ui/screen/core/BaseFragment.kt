@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.binhth.photocollection.ui.screen.MainActivity
 import com.binhth.photocollection.utils.DialogUtils
+import com.tbruyelle.rxpermissions2.RxPermissions
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
     abstract val bindingVariable: Int
@@ -21,7 +23,18 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     @get:LayoutRes
     abstract val layoutId: Int
 
+    lateinit var mainActivity: MainActivity
+
+    lateinit var rxPermissions: RxPermissions
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (activity is MainActivity) {
+            mainActivity = activity as MainActivity
+            activity?.let {
+                rxPermissions = RxPermissions(it)
+            }
+        }
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         initContent(binding)
         return binding.root

@@ -10,6 +10,7 @@ data class PhotoItem(
     val id: String?,
     val createdAt: String? = null,
     val urls: String? = null,
+    val urlsFullImage: String? = null,
     val username: String? = null,
     val likes: Int? = null
 ) : BaseItem()
@@ -19,6 +20,7 @@ class PhotoItemMapper : ItemMapper<Photo, PhotoItem> {
         id = model.id,
         createdAt = model.createdAt,
         urls = model.urls?.thumb,
+        urlsFullImage = model.urls?.regular,
         username = model.user?.username,
         likes = model.likes
     )
@@ -26,7 +28,7 @@ class PhotoItemMapper : ItemMapper<Photo, PhotoItem> {
     override fun mapToDomain(modelItem: PhotoItem) = Photo(
         id = modelItem.id,
         createdAt = modelItem.createdAt,
-        urls = Urls(thumb = modelItem.urls),
+        urls = Urls(thumb = modelItem.urls, full = modelItem.urlsFullImage),
         user = User(username = modelItem.username),
         likes = modelItem.likes
     )

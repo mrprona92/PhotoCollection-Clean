@@ -8,4 +8,10 @@
     <string name="search_collection_tab2">Photo</string>
     <string name="search_collection_hint">Typing to search</string>
     <string name="search_collection_placeholder">Search collection, photo</string>
+    <string name="details_image_set_wallpaper">Set as wallpaper</string>
+    <string name="details_image_download">Download Image</string>
+    <string name="details_image_download_started">Download started</string>
+    <string name="details_image_download_complete">Image saved in %1$s</string>
+    <string name="request_permission_false">Permission Denied</string>
+    <string name="zero_percent">0%</string>
 </resources>

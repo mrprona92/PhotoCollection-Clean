@@ -48,6 +48,10 @@ versions.oss_licenses = "16.0.0"
 versions.license_plugin = "0.9.3"
 versions.koin = "1.0.0"
 versions.searchview = "0.7.6"
+versions.photoview = "2.2.0"
+versions.fabmenu = "1.6.4"
+versions.fetch = "2.2.0-RC15"
+versions.rxpermission = "0.10.2"
 def deps = [:]
 
 def build_versions = [:]
@@ -211,6 +215,23 @@ deps.robolectric = robolectric
 def searchview = [:]
 searchview.all = "com.github.mancj:MaterialSearchBar:$versions.searchview"
 deps.searchview = searchview
+
+def photoview = [:]
+photoview.all = "com.github.chrisbanes:PhotoView:$versions.photoview"
+deps.photoview = photoview
+
+def fabmenu = [:]
+fabmenu.all = "com.github.clans:fab:$versions.fabmenu"
+deps.fabmenu = fabmenu
+
+def fetch = [:]
+fetch.all = "com.tonyodev.fetch2:fetch2:$versions.fetch"
+fetch.okhttp = "com.tonyodev.fetch2okhttp:fetch2okhttp:$versions.fetch"
+deps.fetch = fetch
+
+def rxpermission = [:]
+rxpermission.all = "com.github.tbruyelle:rxpermissions:$versions.rxpermission"
+deps.rxpermission = rxpermission
 
 def koin = [:]
 koin.core = "org.koin:koin-core:$versions.koin"
