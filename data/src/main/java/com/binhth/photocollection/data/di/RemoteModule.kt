@@ -40,8 +40,7 @@ fun createOkHttpClient(
         .build()
 }
 
-fun createHeaderInterceptor(
-): Interceptor {
+fun createHeaderInterceptor(): Interceptor {
     return Interceptor { chain ->
         val request = chain.request()
         val newUrl = request.url().newBuilder()
@@ -68,8 +67,3 @@ fun createAppRetrofit(okHttpClient: OkHttpClient): Retrofit {
         .client(okHttpClient)
         .build()
 }
-
-
-
-
-

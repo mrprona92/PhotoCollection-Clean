@@ -19,18 +19,14 @@ class ListPhotoFragment : BaseListFragment<FragmentListItemBinding, ListPhotoVie
     SwipeRefreshLayout.OnRefreshListener {
     companion object {
         const val TAG = "ListPhotoFragment"
-
         const val PHOTOLIST_ID = "photoListId"
-
         const val IS_CALL_FROM_COLLECTIONLIST = "isFromCollection"
 
-        fun newInstance(photoListId: String?, isFromCollection: Boolean): ListPhotoFragment {
-            val args = Bundle()
-            args.putString(PHOTOLIST_ID, photoListId)
-            args.putBoolean(IS_CALL_FROM_COLLECTIONLIST, isFromCollection)
-            val fragment = ListPhotoFragment()
-            fragment.arguments = args
-            return fragment
+        fun newInstance(photoListId: String?, isFromCollection: Boolean) = ListPhotoFragment().apply {
+            arguments = Bundle().apply {
+                putString(PHOTOLIST_ID, photoListId)
+                putBoolean(IS_CALL_FROM_COLLECTIONLIST, isFromCollection)
+            }
         }
     }
 

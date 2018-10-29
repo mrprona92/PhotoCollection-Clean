@@ -8,6 +8,7 @@ import com.binhth.photocollection.BR
 import com.binhth.photocollection.R
 import com.binhth.photocollection.databinding.FragmentPhotoDetailsBinding
 import com.binhth.photocollection.ui.screen.core.BaseFragment
+import com.binhth.photocollection.ui.screen.photoeditor.PhotoEditorFragment
 import com.binhth.photocollection.utils.DialogUtils
 import com.binhth.photocollection.utils.PhotoUtils
 import com.github.clans.fab.FloatingActionButton
@@ -19,17 +20,14 @@ class PhotoDetailsFragment : BaseFragment<FragmentPhotoDetailsBinding, PhotoDeta
 
     companion object {
         const val TAG = "PhotoDetailsFragment"
-
         const val PHOTO_URL = "photoUrl"
         const val PHOTO_ID = "id"
 
-        fun newInstance(id: String?, photoUrl: String?): PhotoDetailsFragment {
-            val args = Bundle()
-            args.putString(PHOTO_ID, id)
-            args.putString(PHOTO_URL, photoUrl)
-            val fragment = PhotoDetailsFragment()
-            fragment.arguments = args
-            return fragment
+        fun newInstance(id: String?, photoUrl: String?) = PhotoDetailsFragment().apply {
+            arguments = Bundle().apply {
+                putString(PHOTO_ID, id)
+                putString(PHOTO_URL, photoUrl)
+            }
         }
     }
 
@@ -63,7 +61,7 @@ class PhotoDetailsFragment : BaseFragment<FragmentPhotoDetailsBinding, PhotoDeta
                 }
             })
             filePathSaved.observe(this@PhotoDetailsFragment, Observer {
-                DialogUtils.showToast(mainActivity, getString(R.string.details_image_download_complete, it))
+                DialogUtils.showToast(mainActivity, getString(R.string.details_image_save_complete, it))
             })
         }
         activity?.title = tag
@@ -81,7 +79,6 @@ class PhotoDetailsFragment : BaseFragment<FragmentPhotoDetailsBinding, PhotoDeta
 
     override val layoutId: Int
         get() = R.layout.fragment_photo_details
-
 
     private fun initFabMenu(floatingActionMenu: FloatingActionMenu) {
         val downloadFab = FloatingActionButton(activity)
@@ -116,7 +113,23 @@ class PhotoDetailsFragment : BaseFragment<FragmentPhotoDetailsBinding, PhotoDeta
                     }
                 }
         }
+        val editorImageFab = FloatingActionButton(activity)
+        editorImageFab.buttonSize = FloatingActionButton.SIZE_MINI
+        editorImageFab.labelText = getString(R.string.details_image_editor_photo)
+        editorImageFab.setImageResource(R.drawable.ic_edit)
+        editorImageFab.setOnClickListener { _ ->
+            mainActivity.apply {
+                val photoEditorFragment = PhotoEditorFragment.newInstance(
+                    arguments?.getString(PhotoDetailsFragment.PHOTO_URL)
+                )
+                replaceFragment(
+                    photoEditorFragment,
+                    R.id.container, PhotoEditorFragment.TAG, true
+                )
+            }
+        }
         floatingActionMenu.addMenuButton(downloadFab)
         floatingActionMenu.addMenuButton(setWallpaperFab)
+        floatingActionMenu.addMenuButton(editorImageFab)
     }
 }
