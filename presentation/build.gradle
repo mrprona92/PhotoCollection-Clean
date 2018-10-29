@@ -103,6 +103,7 @@ dependencies {
     implementation deps.fetch.all
     implementation deps.fetch.okhttp
     implementation deps.rxpermission.all
+    implementation deps.editorimage.all
 
     /**
      * testing
