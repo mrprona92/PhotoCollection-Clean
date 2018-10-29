@@ -13,7 +13,6 @@ data class CollectionEntity(
     @field: SerializedName("cover_photo") val coverPhoto: CoverPhotoEntity? = null
 ) : BaseEntity()
 
-
 class CollectionEntityMapper(
     private val coverPhotoEntityMapper: CoverPhotoEntityMapper
 ) : EntityMapper<Collection, CollectionEntity> {
