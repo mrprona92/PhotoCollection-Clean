@@ -1,16 +1,13 @@
 package com.binhth.photocollection.ui.screen.photoeditor
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.binhth.photocollection.BR
@@ -26,6 +23,7 @@ import com.binhth.photocollection.ui.screen.photoeditor.tooledit.ToolType
 import com.binhth.photocollection.utils.DialogUtils
 import io.reactivex.annotations.NonNull
 import ja.burhanrashid52.photoeditor.*
+import kotlinx.android.synthetic.main.fragment_photo_editor.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
@@ -65,9 +63,6 @@ class PhotoEditorFragment : BaseFragment<FragmentPhotoEditorBinding, PhotoEditor
 
     private var isFilterVisible: Boolean = false
     private val constraintSet = ConstraintSet()
-    private lateinit var recyclerViewTools: RecyclerView
-    private lateinit var recyclerViewFilters: RecyclerView
-    private lateinit var mainView: ConstraintLayout
 
     override fun initContent(viewBinding: FragmentPhotoEditorBinding) {
         brushFragment = BrushFragment()
@@ -90,9 +85,6 @@ class PhotoEditorFragment : BaseFragment<FragmentPhotoEditorBinding, PhotoEditor
         })
         viewBinding.viewModel = viewModel
         viewBinding.apply {
-            recyclerViewTools = rvConstraintTools
-            recyclerViewFilters = rvFilterView
-            mainView = rootView
             photoEditorView2 = photoEditorView
             rvFilterView.apply {
                 photoEditor = PhotoEditor.Builder(context, photoEditorView2)
@@ -196,31 +188,31 @@ class PhotoEditorFragment : BaseFragment<FragmentPhotoEditorBinding, PhotoEditor
 
     private fun showFilter(isVisible: Boolean) {
         isFilterVisible = isVisible
-        constraintSet.clone(mainView)
+        constraintSet.clone(root_view)
         if (isVisible) {
-            constraintSet.clear(recyclerViewFilters.id, ConstraintSet.START)
+            constraintSet.clear(rv_filter_view.id, ConstraintSet.START)
             constraintSet.connect(
-                recyclerViewFilters.id, ConstraintSet.START,
+                rv_filter_view.id, ConstraintSet.START,
                 ConstraintSet.PARENT_ID, ConstraintSet.START
             )
             constraintSet.connect(
-                recyclerViewFilters.id, ConstraintSet.END,
+                rv_filter_view.id, ConstraintSet.END,
                 ConstraintSet.PARENT_ID, ConstraintSet.END
             )
         } else {
             constraintSet.connect(
-                recyclerViewFilters.id, ConstraintSet.START,
+                rv_filter_view.id, ConstraintSet.START,
                 ConstraintSet.PARENT_ID, ConstraintSet.END
             )
-            constraintSet.clear(recyclerViewFilters.id, ConstraintSet.END)
+            constraintSet.clear(rv_filter_view.id, ConstraintSet.END)
         }
 
         val changeBounds = ChangeBounds()
         changeBounds.duration = 350
         changeBounds.interpolator = AnticipateOvershootInterpolator(1.0f)
-        TransitionManager.beginDelayedTransition(mainView, changeBounds)
+        TransitionManager.beginDelayedTransition(root_view, changeBounds)
 
-        constraintSet.applyTo(mainView)
+        constraintSet.applyTo(root_view)
     }
 
     override fun onBackPressed(): Boolean {
