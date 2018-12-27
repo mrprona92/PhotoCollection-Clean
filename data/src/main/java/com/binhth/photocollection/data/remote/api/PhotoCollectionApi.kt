@@ -37,5 +37,6 @@ interface PhotoCollectionApi {
         @Query(Constants.QUERY) query: String,
         @Query(Constants.PAGE) page: Int,
         @Query(Constants.PER_PAGE) pageSize: Int = Constants.PAGE_SIZE
-    ): Single<SearchPhotoResponse>
+    ): Single<
+            SearchPhotoResponse>
 }

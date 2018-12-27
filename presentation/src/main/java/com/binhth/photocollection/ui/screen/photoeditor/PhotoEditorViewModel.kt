@@ -21,7 +21,7 @@ class PhotoEditorViewModel : BaseViewModel() {
     val saveSettingData = MutableLiveData<SaveSettings>()
     val filePatchData = MutableLiveData<String>()
     var imageUrl = MutableLiveData<String>()
-    var isUndoAction = MutableLiveData<Boolean>()
+    var typeAction = MutableLiveData<ActionType>()
     var obsTitleAction = ObservableField<String>("")
 
     fun setupFilters() {
@@ -88,10 +88,14 @@ class PhotoEditorViewModel : BaseViewModel() {
     }
 
     fun undoAction() {
-        isUndoAction.value = true
+        typeAction.value = ActionType.UNDO
     }
 
     fun redoAction() {
-        isUndoAction.value = false
+        typeAction.value = ActionType.REDO
+    }
+
+    fun saveAction() {
+        typeAction.value = ActionType.SAVE
     }
 }

@@ -123,10 +123,11 @@ class PhotoEditorFragment : BaseFragment<FragmentPhotoEditorBinding, PhotoEditor
                 listToolAdapter.submitList(list)
             })
 
-            isUndoAction.observe(this@PhotoEditorFragment, Observer {
-                when (isUndoAction.value) {
-                    true -> photoEditor.undo()
-                    false -> photoEditor.redo()
+            typeAction.observe(this@PhotoEditorFragment, Observer {
+                when (typeAction.value) {
+                    ActionType.UNDO -> photoEditor.undo()
+                    ActionType.REDO -> photoEditor.redo()
+                    ActionType.SAVE -> saveImage()
                 }
             })
 
@@ -150,7 +151,7 @@ class PhotoEditorFragment : BaseFragment<FragmentPhotoEditorBinding, PhotoEditor
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.isLoading.removeObservers(this)
-        viewModel.isUndoAction.removeObservers(this)
+        viewModel.typeAction.removeObservers(this)
         viewModel.listToolsData.removeObservers(this)
         viewModel.imageUrl.removeObservers(this)
         viewModel.saveSettingData.removeObservers(this)

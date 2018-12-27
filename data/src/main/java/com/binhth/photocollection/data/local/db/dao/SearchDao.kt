@@ -13,6 +13,6 @@ interface SearchDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(listSearched: List<SearchHistoryEntity>): List<Long>
 
-    @Query("SELECT * FROM searchhistory LIMIT 10 OFFSET (SELECT COUNT(*) FROM searchhistory)-10")
+    @Query("SELECT * FROM searchhistory")
     fun findSearchHistory(): Single<List<SearchHistoryEntity>>
 }
